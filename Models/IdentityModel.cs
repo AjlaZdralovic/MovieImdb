@@ -21,7 +21,7 @@ namespace MovieImdb.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("MovieImdb_dbEntities1", throwIfV1Schema: false)
+            : base("MovieImdb_db", throwIfV1Schema: false)
         {
         }
 
