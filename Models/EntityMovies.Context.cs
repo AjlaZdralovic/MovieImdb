@@ -9,10 +9,17 @@
 
 namespace MovieImdb.Models
 {
+    using System;
+    using System.Configuration;
     using System.Data.Entity;
+    using System.Data.Entity.Core.EntityClient;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
-
+    using System.Data.SqlClient;
+    //  using System.Data.Objects;
+    // using System.Data.Objects.DataClasses;
+    using System.Linq;
+    
     public partial class MoviesDBEntities : DbContext
     {
         public MoviesDBEntities()
@@ -24,12 +31,19 @@ namespace MovieImdb.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+       
+
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Actor> Actor { get; set; }
         public DbSet<ActorMovie> ActorMovie { get; set; }
-        public DbSet<CBLoginInfo> CBLoginInfo { get; set; }
         public DbSet<MovieRatings> MovieRatings { get; set; }
+        public DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
     
         public virtual ObjectResult<string> GetCBLoginInfo(string userName, string password)
         {

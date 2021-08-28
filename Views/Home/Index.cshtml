@@ -56,8 +56,7 @@
                         (yearId.indexOf(searched) !== 0 && yearId.toLowerCase().indexOf(searched.toLowerCase()) >= 0) ||
                         (searched.includes("older") && (parseInt(yearNow) - parseInt(num)) > parseInt(yearId)) ||
                         (searched.includes("star") && parseInt(rating) === parseInt(num)) ||
-                        (searched.includes("least") && parseInt(rating) >= parseInt(num)))
-                        
+                        (searched.includes("least") && parseInt(rating) >= parseInt(num)))                        
                          $(this).show();
                      
                     else $(this).hide();

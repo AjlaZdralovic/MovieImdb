@@ -6,7 +6,10 @@ using Newtonsoft.Json;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -38,13 +41,45 @@ namespace MovieImdb.Controllers
             }
             else 
             */
+
+           //string generated= GenerateConnectionStringEntity("");
+           // Console.WriteLine(generated);
             List<Movie> list = _entity.Movie.Where(s => s.title.StartsWith(search) || s.title.Contains(search)
                                    || s.description.Contains(search)
                                    ).ToList();
             return View(_entity.Movie.OrderByDescending(t => t.rating).ToList());
         }
 
-
+        public string GenerateConnectionStringEntity(string connEntity)
+        {
+            connEntity = "server=tcp:movieimdbdbserver.database.windows.net,1433; Initial Catalog = MovieImdb_db; Persist Security Info = False; User ID = sqladmin; Password = admin_123; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
+            // Initialize the SqlConnectionStringBuilder.  
+            string dbServer = string.Empty;
+            string dbName = string.Empty;
+            // use it from previously built normal connection string  
+            string connectString = Convert.ToString(ConfigurationManager.ConnectionStrings[connEntity]);
+            var sqlBuilder = new SqlConnectionStringBuilder(connectString);
+            // Set the properties for the data source.  
+            dbServer = sqlBuilder.DataSource;
+            dbName = sqlBuilder.InitialCatalog;
+            sqlBuilder.UserID = "sqladmin";
+            sqlBuilder.Password = "admin_123";
+            sqlBuilder.IntegratedSecurity = false;
+            sqlBuilder.MultipleActiveResultSets = true;
+            // Build the SqlConnection connection string.  
+            string providerString = Convert.ToString(sqlBuilder);
+            // Initialize the EntityConnectionStringBuilder.  
+            var entityBuilder = new EntityConnectionStringBuilder();
+            //Set the provider name.  
+            entityBuilder.Provider = "System.Data.SqlClient";
+            // Set the provider-specific connection string.  
+            entityBuilder.ProviderConnectionString = providerString;
+            // Set the Metadata location.  
+            entityBuilder.Metadata = @"res://*/EntityDataObjectName.csdl| 
+                          res: //*/EntityDataObjectName.ssdl|  
+                          res: //*/EntityDataObjectName.msl";
+            return entityBuilder.ToString();
+        }
 
         public ActionResult AutoComplete(string term)
         {
@@ -69,8 +104,8 @@ namespace MovieImdb.Controllers
         public ActionResult Edit(int ID)
         {
             Movie movie = new Movie();
-            MoviesDBEntities entity = new MoviesDBEntities();
-            Movie _movie = entity.Movie.Where(c => c.Id == ID).SingleOrDefault();
+           // MoviesDBEntities entity = new MoviesDBEntities();
+            Movie _movie = _entity.Movie.Where(c => c.Id == ID).SingleOrDefault();
             return View(_movie);
         }
 
@@ -79,8 +114,8 @@ namespace MovieImdb.Controllers
         public ActionResult Edit(Movie movie)
         {
             
-            MoviesDBEntities entity = new MoviesDBEntities();
-            List<Movie> listOfMovis = entity.Movie.ToList<Movie>();
+          //  MoviesDBEntities entity = new MoviesDBEntities();
+            List<Movie> listOfMovis = _entity.Movie.ToList<Movie>();
 
         
             string userName= (string.IsNullOrEmpty(User.Identity.GetUserId()) || string.IsNullOrWhiteSpace(User.Identity.GetUserId())) ? "Anonymous" : User.Identity.GetUserId();

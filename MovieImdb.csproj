@@ -241,7 +241,6 @@
     <Compile Include="Class\ResponseMovie.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,10 +252,25 @@
     <Compile Include="Models\ActorMovie.cs">
       <DependentUpon>EntityMovies.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CBLoginInfo.cs">
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>EntityMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>EntityMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>EntityMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserRoles.cs">
+      <DependentUpon>EntityMovies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>EntityMovies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CBUserModel.cs" />
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>EntityMovies.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntityMovies.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -321,6 +335,7 @@
     <Content Include="Models\EntityMovies.edmx.diagram">
       <DependentUpon>EntityMovies.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\MovieImdb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

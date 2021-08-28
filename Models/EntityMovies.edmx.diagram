@@ -8,8 +8,17 @@
         <EntityTypeShape EntityType="MoviesDBModel.Movie" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MoviesDBModel.Actor" Width="1.5" PointX="3.75" PointY="0.75" />
         <EntityTypeShape EntityType="MoviesDBModel.ActorMovie" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="MoviesDBModel.CBLoginInfo" Width="1.5" PointX="2.75" PointY="3.75" />
+   
         <EntityTypeShape EntityType="MoviesDBModel.MovieRatings" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="MoviesDBModel.AspNetRoles" Width="1.5" PointX="6.75" PointY="0.875" />
+        <EntityTypeShape EntityType="MoviesDBModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="MoviesDBModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="9.75" />
+        <EntityTypeShape EntityType="MoviesDBModel.AspNetUserRoles" Width="1.5" PointX="9" PointY="0.875" />
+        <EntityTypeShape EntityType="MoviesDBModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="MoviesDBModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" />
+        <AssociationConnector Association="MoviesDBModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" />
+        <AssociationConnector Association="MoviesDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MoviesDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

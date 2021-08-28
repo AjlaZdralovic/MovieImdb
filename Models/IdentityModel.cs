@@ -18,16 +18,16 @@ namespace MovieImdb.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class MoviesDBEntites : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public MoviesDBEntites()
+            : base("MoviesDBEntities", throwIfV1Schema: false)
         {
         }
 
-        public static ApplicationDbContext Create()
+        public static MoviesDBEntites Create()
         {
-            return new ApplicationDbContext();
+            return new MoviesDBEntites();
         }
     }
 }
