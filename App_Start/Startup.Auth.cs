@@ -15,7 +15,7 @@ namespace MovieImdb
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(MoviesDBEntites.Create);
+            app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
@@ -60,8 +60,8 @@ namespace MovieImdb
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "786122253336-o5q61aseqsr1p98f3kjr4l977gd8en7s.apps.googleusercontent.com",
-                ClientSecret = "ZFhIyhRma6BOpP-SzT7xcgTh"
+                ClientId = "355625378549-0r9ukvj6p13jd9tlek5l3jdbj56a1k54.apps.googleusercontent.com",
+                ClientSecret = "ApukqdVKBzm81-H1AJ2DikIE"
             });
         }
     }

@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.AspNet.Identity;
-using MovieImdb.Class;
+
 using MovieImdb.Models;
 using Newtonsoft.Json;
 using PagedList;
@@ -23,7 +23,7 @@ namespace MovieImdb.Controllers
     public class HomeController : Controller
     {
 
-        private MoviesDBEntities _entity = new MoviesDBEntities();
+        private MovieImdb_dbEntities1 _entity = new MovieImdb_dbEntities1();
 
        // [HttpGet]
 
@@ -50,37 +50,7 @@ namespace MovieImdb.Controllers
             return View(_entity.Movie.OrderByDescending(t => t.rating).ToList());
         }
 
-        public string GenerateConnectionStringEntity(string connEntity)
-        {
-            connEntity = "server=tcp:movieimdbdbserver.database.windows.net,1433; Initial Catalog = MovieImdb_db; Persist Security Info = False; User ID = sqladmin; Password = admin_123; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
-            // Initialize the SqlConnectionStringBuilder.  
-            string dbServer = string.Empty;
-            string dbName = string.Empty;
-            // use it from previously built normal connection string  
-            string connectString = Convert.ToString(ConfigurationManager.ConnectionStrings[connEntity]);
-            var sqlBuilder = new SqlConnectionStringBuilder(connectString);
-            // Set the properties for the data source.  
-            dbServer = sqlBuilder.DataSource;
-            dbName = sqlBuilder.InitialCatalog;
-            sqlBuilder.UserID = "sqladmin";
-            sqlBuilder.Password = "admin_123";
-            sqlBuilder.IntegratedSecurity = false;
-            sqlBuilder.MultipleActiveResultSets = true;
-            // Build the SqlConnection connection string.  
-            string providerString = Convert.ToString(sqlBuilder);
-            // Initialize the EntityConnectionStringBuilder.  
-            var entityBuilder = new EntityConnectionStringBuilder();
-            //Set the provider name.  
-            entityBuilder.Provider = "System.Data.SqlClient";
-            // Set the provider-specific connection string.  
-            entityBuilder.ProviderConnectionString = providerString;
-            // Set the Metadata location.  
-            entityBuilder.Metadata = @"res://*/EntityDataObjectName.csdl| 
-                          res: //*/EntityDataObjectName.ssdl|  
-                          res: //*/EntityDataObjectName.msl";
-            return entityBuilder.ToString();
-        }
-
+        
         public ActionResult AutoComplete(string term)
         {
             List<Movie> list = _entity.Movie.Where(s => s.title.StartsWith(term)).ToList();
@@ -129,7 +99,7 @@ namespace MovieImdb.Controllers
                         " WHERE [MovieRatings].[MovieId] = " + movie.Id + ") where Id = " +movie.Id;
 
             try { 
-            using (var context = new MoviesDBEntities())
+            using (var context = new MovieImdb_dbEntities1())
             {
                 context.Database.ExecuteSqlCommand(qinsert);
                 context.Database.ExecuteSqlCommand(query);
@@ -160,7 +130,7 @@ namespace MovieImdb.Controllers
         [HttpPost]
         public ActionResult Create(Movie movie)
         {
-            MoviesDBEntities entity = new MoviesDBEntities();
+            MovieImdb_dbEntities1 entity = new MovieImdb_dbEntities1();
             List<Movie> listOfMovis = entity.Movie.ToList<Movie>();
             listOfMovis.Add(movie);
 
@@ -169,7 +139,7 @@ namespace MovieImdb.Controllers
                            " TRY_CONVERT(datetime,'" + movie.releaseDate + "'),"+ movie.rating + ",'" + movie.releaseMap + "')";
 
             try { 
-            using (var context = new MoviesDBEntities())
+            using (var context = new MovieImdb_dbEntities1())
             {
                 context.Database.ExecuteSqlCommand(qinsert);
                

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MoviesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MovieImdb_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="__MigrationHistory">
@@ -147,7 +147,7 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MoviesDBModelStoreContainer">
+        <EntityContainer Name="MovieImdb_dbModelStoreContainer">
           <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActorMovie" EntityType="Self.ActorMovie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -178,49 +178,11 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MoviesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Movie">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="releaseDate" Type="DateTime" Precision="3" />
-          <Property Name="rating" Type="Double" Nullable="false" />
-          <Property Name="releaseMap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityContainer Name="MoviesDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Movie" EntityType="Self.Movie" />
-          <EntitySet Name="Actor" EntityType="MoviesDBModel.Actor" />
-          <EntitySet Name="ActorMovie" EntityType="MoviesDBModel.ActorMovie" />
-          <EntitySet Name="MovieRatings" EntityType="MoviesDBModel.MovieRatings" />
-          <FunctionImport Name="GetCBLoginInfo" ReturnType="Collection(String)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="AspNetRoles" EntityType="MoviesDBModel.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="MoviesDBModel.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="MoviesDBModel.AspNetUserLogins" />
-          <EntitySet Name="AspNetUserRoles" EntityType="MoviesDBModel.AspNetUserRoles" />
-          <EntitySet Name="AspNetUsers" EntityType="MoviesDBModel.AspNetUsers" />
-          <EntitySet Name="C__MigrationHistory" EntityType="MoviesDBModel.C__MigrationHistory" />
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="MoviesDBModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MoviesDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="MoviesDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="MovieImdb_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Actor">
           <Key>
             <PropertyRef Name="Id" />
@@ -236,32 +198,23 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="ActorId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="MovieRatings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MovieId" Type="Int32" Nullable="false" />
-          <Property Name="Rating" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserRoles" Relationship="MoviesDBModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetUserRoles" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="MoviesDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogins">
           <Key>
@@ -269,25 +222,25 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="MoviesDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserRoles">
           <Key>
             <PropertyRef Name="UserId" />
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRoles" Relationship="MoviesDBModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" FromRole="AspNetUserRoles" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -298,9 +251,29 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="MoviesDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="MoviesDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="releaseDate" Type="DateTime" Precision="3" />
+          <Property Name="rating" Type="Double" Nullable="false" />
+          <Property Name="releaseMap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MovieRatings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -309,16 +282,16 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
             <PropertyRef Name="Model" />
             <PropertyRef Name="ProductVersion" />
           </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Type="MoviesDBModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="MoviesDBModel.AspNetUserRoles" Role="AspNetUserRoles" Multiplicity="*" />
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetRoles">
               <PropertyRef Name="Id" />
@@ -329,10 +302,10 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="MoviesDBModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="MoviesDBModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -343,10 +316,10 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="MoviesDBModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="MoviesDBModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -356,14 +329,108 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="MovieImdb_dbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actor" EntityType="Self.Actor" />
+          <EntitySet Name="ActorMovie" EntityType="Self.ActorMovie" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <EntitySet Name="MovieRatings" EntityType="Self.MovieRatings" />
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MoviesDBModelStoreContainer" CdmEntityContainer="MoviesDBEntities">
+        <EntityContainerMapping StorageEntityContainer="MovieImdb_dbModelStoreContainer" CdmEntityContainer="MovieImdb_dbEntities1">
+          <EntitySetMapping Name="Actor">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.Actor">
+              <MappingFragment StoreEntitySet="Actor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActorMovie">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.ActorMovie">
+              <MappingFragment StoreEntitySet="ActorMovie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserRoles">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.AspNetUserRoles">
+              <MappingFragment StoreEntitySet="AspNetUserRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Movie">
-            <EntityTypeMapping TypeName="MoviesDBModel.Movie">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.Movie">
               <MappingFragment StoreEntitySet="Movie">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="title" ColumnName="title" />
@@ -374,93 +441,23 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Actor">
-            <EntityTypeMapping TypeName="MoviesDBModel.Actor">
-              <MappingFragment StoreEntitySet="Actor">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ActorMovie">
-            <EntityTypeMapping TypeName="MoviesDBModel.ActorMovie">
-              <MappingFragment StoreEntitySet="ActorMovie">
-                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
-                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MovieRatings">
-            <EntityTypeMapping TypeName="MoviesDBModel.MovieRatings">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.MovieRatings">
               <MappingFragment StoreEntitySet="MovieRatings">
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="User" ColumnName="User" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="MoviesDBModel.AspNetRoles">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="MoviesDBModel.AspNetUserClaims">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="MoviesDBModel.AspNetUserLogins">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserRoles">
-            <EntityTypeMapping TypeName="MoviesDBModel.AspNetUserRoles">
-              <MappingFragment StoreEntitySet="AspNetUserRoles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="MoviesDBModel.AspNetUsers">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="MoviesDBModel.C__MigrationHistory">
+            <EntityTypeMapping TypeName="MovieImdb_dbModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -480,7 +477,7 @@ warning 6002: The table/view 'MovieImdb_db.dbo.__MigrationHistory' does not have
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

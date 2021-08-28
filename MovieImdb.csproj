@@ -237,8 +237,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Class\PagingInfo.cs" />
-    <Compile Include="Class\ResponseMovie.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -247,52 +245,51 @@
     </Compile>
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\Actor.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ActorMovie.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetRoles.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaims.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogins.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserRoles.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUsers.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CBUserModel.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityMovies.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityMovies.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityMovies.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityMovies.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EntityMovies.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityMovies.edmx</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
     <Compile Include="Models\Movie.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MovieImdb_dbEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieImdb_dbEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MovieImdb_dbEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MovieImdb_dbEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieImdb_dbEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\MovieRatings.cs">
-      <DependentUpon>EntityMovies.tt</DependentUpon>
+      <DependentUpon>MovieImdb_dbEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -300,15 +297,21 @@
   <ItemGroup>
     <Content Include="404.html" />
     <Content Include="500.html" />
-    <Content Include="App_Data\MoviesDB.mdf" />
-    <Content Include="App_Data\MoviesDB_log.ldf">
-      <DependentUpon>MoviesDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\dark_knight.jpg" />
+    <Content Include="Models\MovieImdb_dbEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieImdb_dbEntities.edmx</DependentUpon>
+      <LastGenOutput>MovieImdb_dbEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MovieImdb_dbEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieImdb_dbEntities.edmx</DependentUpon>
+      <LastGenOutput>MovieImdb_dbEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Content\jquery-ui-1.9.2.custom.min.css" />
     <Content Include="Scripts\jquery-ui-1.9.2.custom.min.js" />
@@ -316,24 +319,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\EntityMovies.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EntityMovies.Context.cs</LastGenOutput>
-      <DependentUpon>EntityMovies.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\EntityMovies.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntityMovies.edmx</DependentUpon>
-      <LastGenOutput>EntityMovies.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\EntityMovies.edmx">
+    <EntityDeploy Include="Models\MovieImdb_dbEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EntityMovies.Designer.cs</LastGenOutput>
+      <LastGenOutput>MovieImdb_dbEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\EntityMovies.edmx.diagram">
-      <DependentUpon>EntityMovies.edmx</DependentUpon>
+    <Content Include="Models\MovieImdb_dbEntities.edmx.diagram">
+      <DependentUpon>MovieImdb_dbEntities.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\MovieImdb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -402,6 +395,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <PropertyGroup>

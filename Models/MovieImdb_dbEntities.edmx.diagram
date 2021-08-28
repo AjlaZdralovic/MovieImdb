@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="400a0edd1e4c440182f996e8a42fddd5" Name="Diagram1">
+        <EntityTypeShape EntityType="MovieImdb_dbModel.Actor" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.ActorMovie" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.AspNetRoles" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.AspNetUserClaims" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.AspNetUserLogins" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.AspNetUserRoles" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.AspNetUsers" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.Movie" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.MovieRatings" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieImdb_dbModel.C__MigrationHistory" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="MovieImdb_dbModel.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieImdb_dbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MovieImdb_dbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
