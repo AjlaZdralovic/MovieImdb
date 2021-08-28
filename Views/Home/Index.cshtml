@@ -1,0 +1,258 @@
+﻿@using PagedList;
+@model IEnumerable<MovieImdb.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
+@section scripts{
+
+    <!--
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#search").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/Index",
+                        type: "POST",
+                        dataType: "json",
+                        data: { term: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return { item };
+                            }))
+
+                        }
+                    })
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+            minLength: 2
+        })
+    </script>
+    -->
+
+    <script type="text/javascript">
+        $("#search").on("keyup", function () {
+            var searched = $(this).val();
+            $("table tr").each(function (results) {
+                if (results !== 0) {
+                    var id = $(this).find("td:nth-child(1)").text();
+                    if (id.indexOf(searched) !== 0 && id.toLowerCase().indexOf(searched.toLowerCase()) < 0)
+                        $(this).hide();
+                    else $(this).show();
+                }
+
+            });
+
+
+        });
+    </script>
+
+
+
+}
+
+
+
+<style>
+    body {
+        background-color: #000;
+    }
+
+    #ui-id-1 {
+        background-color: whitesmoke;
+        max-width: 350px;
+    }
+
+    th, td {
+        color: white;
+        font-size: 10pt;
+    }
+
+    #apiDiv {
+        padding-left: 20px;
+    }
+
+        #apiDiv input, #apiDiv button {
+            font-size: 25px;
+            color: #000;
+        }
+
+        #apiDiv h4 {
+            margin: 10px 0;
+            color: #00e8ff;
+            font-size: 20px;
+        }
+
+        #apiDiv .textAlignCenter {
+            text-align: center;
+        }
+
+            #apiDiv .textAlignCenter img {
+                display: none;
+                width: 100px;
+            }
+
+        #apiDiv #message {
+            padding-top: 10px;
+        }
+
+            #apiDiv #message .resultDiv {
+                background: #FFF;
+                display: inline-block;
+            }
+
+                #apiDiv #message .resultDiv > p {
+                    color: #000;
+                    display: inline-block;
+                    width: 95%;
+                    padding: 10px;
+                    border-bottom: double 2px #CCC;
+                }
+
+                #apiDiv #message .resultDiv .result {
+                    width: 23%;
+                    height: 240px;
+                    padding: 6px;
+                    float: left;
+                    text-align: center;
+                    cursor: pointer;
+                }
+
+                    #apiDiv #message .resultDiv .result img {
+                        width: 75%;
+                    }
+
+                    #apiDiv #message .resultDiv .result p {
+                        margin: 0;
+                    }
+
+                        #apiDiv #message .resultDiv .result p a {
+                            color: #808080;
+                            text-decoration: none;
+                            font-size: 20px;
+                            height: 100px;
+                        }
+
+                            #apiDiv #message .resultDiv .result p a:hover {
+                                text-decoration: underline;
+                            }
+
+        #apiDiv form span {
+            color: red;
+            font-size: 20px;
+        }
+
+    .pagingDiv {
+        background: #f2f2f2;
+    }
+
+        .pagingDiv > a {
+            display: inline-block;
+            padding: 0px 9px;
+            margin-right: 4px;
+            border-radius: 3px;
+            border: solid 1px #c0c0c0;
+            background: #e9e9e9;
+            box-shadow: inset 0px 1px 0px rgba(255,255,255, .8), 0px 1px 3px rgba(0,0,0, .1);
+            font-size: .875em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #717171;
+            text-shadow: 0px 1px 0px rgba(255,255,255, 1);
+        }
+
+            .pagingDiv > a:hover {
+                background: #fefefe;
+                background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FEFEFE), to(#f0f0f0));
+                background: -moz-linear-gradient(0% 0% 270deg,#FEFEFE, #f0f0f0);
+            }
+
+            .pagingDiv > a.active {
+                border: none;
+                background: #616161;
+                box-shadow: inset 0px 0px 8px rgba(0,0,0, .5), 0px 1px 0px rgba(255,255,255, .8);
+                color: #f0f0f0;
+                text-shadow: 0px 0px 3px rgba(0,0,0, .5);
+            }
+</style>
+<!--<h2>Index</h2>-->
+
+<div id="apiDiv">
+    <h4>Search movie</h4>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+
+        <b> Search by: </b>
+        @Html.RadioButton("option", "title", true) <text>Title</text>
+        @Html.RadioButton("option", "description") <text>Description</text>
+
+        @Html.TextBox("search") <input type="submit"
+                                       name="submit"
+                                       value="Search" />
+    }
+
+</div>
+
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <font color="white">@Html.DisplayNameFor(model => model.title)</font>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.releaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.releaseMap)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.releaseDate.Value.Date.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rating)
+            </td>
+            <td>
+                <img src=@Html.DisplayFor(modelItem => item.releaseMap) width="100" height="150" />
+
+            </td>
+            <td>
+                @Html.ActionLink("Rate movie", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Movie Details", "Details", new { id = item.Id }) |
+            </td>
+        </tr>
+    }
+
+</table>
+
+

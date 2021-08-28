@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MoviesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ActorMovie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="ActorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CBLoginInfo">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastLoginDate" Type="datetime" />
+          <Property Name="LoginFailedCount" Type="int" />
+          <Property Name="LoginIPAddress" Type="nvarchar" MaxLength="20" />
+          <Property Name="CustomerTimeZone" Type="nvarchar" MaxLength="20" />
+          <Property Name="LastAccessedDate" Type="datetime" />
+          <Property Name="AccountLocked" Type="bit" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="releaseDate" Type="datetime" />
+          <Property Name="rating" Type="float" Nullable="false" />
+          <Property Name="releaseMap" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MovieRatings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User" Type="varchar" MaxLength="50" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="GetCBLoginInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MoviesDBModelStoreContainer">
+          <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActorMovie" EntityType="Self.ActorMovie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CBLoginInfo" EntityType="Self.CBLoginInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieRatings" EntityType="Self.MovieRatings" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MoviesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="releaseDate" Type="DateTime" Precision="3" />
+          <Property Name="rating" Type="Double" Nullable="false" />
+          <Property Name="releaseMap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="MoviesDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <EntitySet Name="Actor" EntityType="MoviesDBModel.Actor" />
+          <EntitySet Name="ActorMovie" EntityType="MoviesDBModel.ActorMovie" />
+          <EntitySet Name="CBLoginInfo" EntityType="MoviesDBModel.CBLoginInfo" />
+          <EntitySet Name="MovieRatings" EntityType="MoviesDBModel.MovieRatings" />
+          <FunctionImport Name="GetCBLoginInfo" ReturnType="Collection(String)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ActorMovie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="ActorId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CBLoginInfo">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
+          <Property Name="LoginFailedCount" Type="Int32" />
+          <Property Name="LoginIPAddress" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerTimeZone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LastAccessedDate" Type="DateTime" Precision="3" />
+          <Property Name="AccountLocked" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MovieRatings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MoviesDBModelStoreContainer" CdmEntityContainer="MoviesDBEntities">
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="MoviesDBModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="releaseMap" ColumnName="releaseMap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actor">
+            <EntityTypeMapping TypeName="MoviesDBModel.Actor">
+              <MappingFragment StoreEntitySet="Actor">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActorMovie">
+            <EntityTypeMapping TypeName="MoviesDBModel.ActorMovie">
+              <MappingFragment StoreEntitySet="ActorMovie">
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CBLoginInfo">
+            <EntityTypeMapping TypeName="MoviesDBModel.CBLoginInfo">
+              <MappingFragment StoreEntitySet="CBLoginInfo">
+                <ScalarProperty Name="AccountLocked" ColumnName="AccountLocked" />
+                <ScalarProperty Name="LastAccessedDate" ColumnName="LastAccessedDate" />
+                <ScalarProperty Name="CustomerTimeZone" ColumnName="CustomerTimeZone" />
+                <ScalarProperty Name="LoginIPAddress" ColumnName="LoginIPAddress" />
+                <ScalarProperty Name="LoginFailedCount" ColumnName="LoginFailedCount" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieRatings">
+            <EntityTypeMapping TypeName="MoviesDBModel.MovieRatings">
+              <MappingFragment StoreEntitySet="MovieRatings">
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCBLoginInfo" FunctionName="MoviesDBModel.Store.GetCBLoginInfo" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
