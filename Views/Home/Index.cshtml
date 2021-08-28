@@ -41,12 +41,26 @@
     <script type="text/javascript">
         $("#search").on("keyup", function () {
             var searched = $(this).val();
+            var num = searched.replace(/[^0-9]/g, "");
+            
             $("table tr").each(function (results) {
                 if (results !== 0) {
                     var id = $(this).find("td:nth-child(1)").text();
-                    if (id.indexOf(searched) !== 0 && id.toLowerCase().indexOf(searched.toLowerCase()) < 0)
-                        $(this).hide();
-                    else $(this).show();
+                    var descId = $(this).find("td:nth-child(2)").text();               
+                    var yearId = $(this).find("td:nth-child(3)").text();
+                    var rating = $(this).find("td:nth-child(4)").text();
+                    var yearNow = new Date().getFullYear().toString();
+
+                    if ((id.indexOf(searched) !== 0 && id.toLowerCase().indexOf(searched.toLowerCase()) >= 0) ||
+                        (descId.indexOf(searched) !== 0 && descId.toLowerCase().indexOf(searched.toLowerCase()) >= 0) ||
+                        (yearId.indexOf(searched) !== 0 && yearId.toLowerCase().indexOf(searched.toLowerCase()) >= 0) ||
+                        (searched.includes("older") && (parseInt(yearNow) - parseInt(num)) > parseInt(yearId)) ||
+                        (searched.includes("star") && parseInt(rating) === parseInt(num)) ||
+                        (searched.includes("least") && parseInt(rating) >= parseInt(num)))
+                        
+                         $(this).show();
+                     
+                    else $(this).hide();
                 }
 
             });
@@ -190,9 +204,9 @@
     @using (Html.BeginForm("Index", "Home", FormMethod.Get))
     {
 
-        <b> Search by: </b>
-        @Html.RadioButton("option", "title", true) <text>Title</text>
-        @Html.RadioButton("option", "description") <text>Description</text>
+       // <b> Search by: </b>
+      //  @Html.RadioButton("option", "title", true) <text>Title</text>
+      //  @Html.RadioButton("option", "description") <text>Description</text>
 
         @Html.TextBox("search") <input type="submit"
                                        name="submit"

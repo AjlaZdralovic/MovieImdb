@@ -26,8 +26,9 @@ namespace MovieImdb.Controllers
 
         public ActionResult Index(string option, string search)
         {
-           if(option == "title") {
-                List<Movie> list = _entity.Movie.Where(s => s.title.StartsWith(search)).ToList();
+
+            /*if(option == "title") {
+                List<Movie> list = _entity.Movie.Where(s => s.title.StartsWith(search) || s.title.Contains(search)).ToList();
                 return View(list.OrderByDescending(t => t.rating).ToList());
             }
             else if (option == "description")
@@ -36,7 +37,11 @@ namespace MovieImdb.Controllers
                 return View(list.OrderByDescending(t => t.rating).ToList());
             }
             else 
-                 return View(_entity.Movie.OrderByDescending(t => t.rating).ToList());
+            */
+            List<Movie> list = _entity.Movie.Where(s => s.title.StartsWith(search) || s.title.Contains(search)
+                                   || s.description.Contains(search)
+                                   ).ToList();
+            return View(_entity.Movie.OrderByDescending(t => t.rating).ToList());
         }
 
 
